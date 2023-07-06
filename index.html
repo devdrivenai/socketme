@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socketme</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="/static/index.css">
+</head>
+<body>
+    <section id="container">
+        <h1>Hola Carola</h1>
+        <main>
+            <!-- <p class="msg others-msg">Hola Carola!</p>
+            <p class="msg own-msg">Como andas?</p> -->
+        </main>
+        <form id="msg-form">
+            <textarea name="message" id="message" cols="30" rows="10" placeholder="Your message here..." autocomplete="off" autofocus required></textarea>
+            <input id="submit-msg" type="submit" value="Send">
+        </form>
+    </section>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/static/index.js"></script>
+</body>
+</html>
