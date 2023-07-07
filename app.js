@@ -29,4 +29,8 @@ app.get('/chat', (req, res) => {
     res.sendFile(`${__dirname}/chat.html`)
 })
 
+app.get('/login', (req, res) => {
+    res.sendFile(`${__dirname}/login.html`)
+})
+
 module.exports = app

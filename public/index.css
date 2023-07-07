@@ -134,3 +134,34 @@ main {
     color: #fff;
     font-size: 1rem;
 }
+
+/* login-page specifics */
+
+#login-form {
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 2rem;
+    /* height: 50vh; */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#login-form > p {
+    margin-top: -2.7rem;
+    background-color: blanchedalmond;
+    padding: 0 0.2rem;
+    width: fit-content;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.form-field > input {
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
