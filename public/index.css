@@ -112,3 +112,25 @@ main {
     color: #fff;
     font-size: 1rem;
 }
+
+/* home-page specifics */
+
+#home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-inline: 2rem;
+}
+
+#redirect-form {
+    margin-top: 1.5rem;
+}
+
+#redirect-submit {
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem 2rem;
+    background-color: rgb(68, 68, 140);
+    color: #fff;
+    font-size: 1rem;
+}
