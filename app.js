@@ -1,6 +1,9 @@
 const express = require('express')
 const livereload = require('livereload')
 const connectLiveReload = require('connect-livereload')
+const bodyParser = require('body-parser')
+
+const users = require('./data/users')
 
 const app = express()
 
@@ -20,17 +23,42 @@ liveReloadServer.server.once('connection', () => {
 })
 
 app.use('/static', express.static(publicDir))
+app.use(bodyParser.urlencoded({ extended: false }))
+app.set('view engine', 'pug')
+
+const champion = {
+    name: 'Uruguay',
+    color: 'skyblue'
+}
 
 app.get('/', (req, res) => {
-    res.sendFile(`${__dirname}/`)
-})
-
-app.get('/chat', (req, res) => {
-    res.sendFile(`${__dirname}/chat.html`)
+    res.render('')
 })
 
 app.get('/login', (req, res) => {
-    res.sendFile(`${__dirname}/login.html`)
+    res.render('login')
+})
+
+app.post('/login', (req, res) => {
+    const user = { ...req.body }
+    // console.log(user) // -> OK
+    for (const eachUser of users) {
+        // console.log(eachUser.username) // -> OK
+        if (eachUser.username === user.username &&
+            eachUser.password === user.password) {
+                console.log('It worked!')
+                return res.render('chat', {user})
+        }
+    }
+    return res.status(401).render('login', {user})
+})
+
+app.get('/chat', (req, res) => {
+    res.render('chat')
+})
+
+app.get('/*', (req, res) => {
+    res.status(404).render('404')
 })
 
 module.exports = app

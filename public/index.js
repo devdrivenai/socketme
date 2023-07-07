@@ -1,8 +1,13 @@
-const socket = io()
+user = JSON.parse(user)
+
+const socket = io({
+    query: user
+})
 
 const main = document.querySelector('main')
 const msgBox = document.querySelector('#message')
 const submitBtn = document.querySelector('#submit-msg')
+const signOutBtn = document.querySelector('#sign-out')
 
 const addMsgBox = (text, ownMsg = true) => {
     const p = document.createElement('p')
@@ -25,7 +30,13 @@ const getMsg = event => {
     msgBox.value = ''
 }
 
+const signOut = () => {
+    socket.emit('sign_out')
+    window.location.href = '/'
+}
+
 submitBtn.addEventListener('click', getMsg)
+signOutBtn.addEventListener('click', signOut)
 
 socket.on('others_msg', msg => {
     console.log('This client received a msg from others:')

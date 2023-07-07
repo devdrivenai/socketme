@@ -1,0 +1,19 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Socketme
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+  link(href='https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap' rel='stylesheet')
+  link(rel='stylesheet' href='/static/index.css')
+section#home-container
+  form#login-form(action='/login' method='POST')
+    p Login
+    .form-field
+      label(for='username') Username:
+      input#username(type='text' name='username' autocomplete='off' required='' value=username)
+    .form-field
+      label(for='password') Password:
+      input#password(type='password' name='password' autocomplete='off' required='' value=password)
+    input#redirect-submit(type='submit' value='Sign in')
