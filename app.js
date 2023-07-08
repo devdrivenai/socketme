@@ -2,8 +2,10 @@ const express = require('express')
 const livereload = require('livereload')
 const connectLiveReload = require('connect-livereload')
 const bodyParser = require('body-parser')
+const session = require('express-session')
 
 const users = require('./data/users')
+const isLoggedIn = require('./middleware/isLoggedIn')
 
 const app = express()
 
@@ -26,10 +28,12 @@ app.use('/static', express.static(publicDir))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.set('view engine', 'pug')
 
-const champion = {
-    name: 'Uruguay',
-    color: 'skyblue'
-}
+app.use(session({
+    secret: 'blablablaincrediblysafesecret',
+    resave: false,
+    saveUninitialized: false
+  }))
+
 
 app.get('/', (req, res) => {
     res.render('')
@@ -41,19 +45,54 @@ app.get('/login', (req, res) => {
 
 app.post('/login', (req, res) => {
     const user = { ...req.body }
-    // console.log(user) // -> OK
+    let userFound = false
     for (const eachUser of users) {
-        // console.log(eachUser.username) // -> OK
-        if (eachUser.username === user.username &&
-            eachUser.password === user.password) {
-                console.log('It worked!')
-                return res.render('chat', {user})
+        if (eachUser.username !== user.username) {
+            continue
+        }
+        if (eachUser.password === user.password) {
+            userFound = true
+            req.session.regenerate(err => {
+                if (err) {
+                    console.error('Error regenerating the session:', err)
+                    return res.redirect('login')
+                }
+                req.session.user = user
+                req.session.save(err => {
+                    if (err) {
+                        console.error('Error saving the session:', err)
+                        return res.redirect('login')
+                    }
+                    return res.render('chat', {user})
+                })
+            })
+            break
         }
     }
-    return res.status(401).render('login', {user})
+    if (!userFound) {
+        console.error('Wrong username or password!');
+        return res.status(401).render('login', {user})
+    }
 })
 
-app.get('/chat', (req, res) => {
+app.get('/logout', isLoggedIn, (req, res) => {
+    req.session.user = null
+    req.session.save(err => {
+        if (err) {
+            console.error('Error deleting the session:', err)
+            return res.redirect('')
+        }
+        req.session.regenerate(err => {
+            if (err) {
+                console.error('Error regenerating the session:', err)
+                return res.redirect('login')
+            }
+            return res.redirect('')
+        })
+    })
+})
+
+app.get('/chat', isLoggedIn, (req, res) => {
     res.render('chat')
 })
 

@@ -5,11 +5,7 @@ const app = require('./app')
 const io = new Server(server)
 
 io.on('connection', clientSocket => {
-    // console.log('A client socket has connected...')
     const { username, password } = clientSocket.handshake.query
-    // const {user} = clientSocket.handshake.query
-    // console.log(clientSocket.handshake.query)
-    // console.log(user)
     console.log(`${username} has connected...`)
 
     clientSocket.on('msg_sent', msg => {

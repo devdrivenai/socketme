@@ -32,7 +32,7 @@ const getMsg = event => {
 
 const signOut = () => {
     socket.emit('sign_out')
-    window.location.href = '/'
+    window.location.href = '/logout'
 }
 
 submitBtn.addEventListener('click', getMsg)
