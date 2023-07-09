@@ -63,7 +63,7 @@ app.post('/login', (req, res) => {
                         console.error('Error saving the session:', err)
                         return res.redirect('login')
                     }
-                    return res.render('chat', {user})
+                    res.redirect('chat')
                 })
             })
             break
@@ -93,7 +93,7 @@ app.get('/logout', isLoggedIn, (req, res) => {
 })
 
 app.get('/chat', isLoggedIn, (req, res) => {
-    res.render('chat')
+    res.render('chat', { user: req.session.user })
 })
 
 app.get('/*', (req, res) => {
