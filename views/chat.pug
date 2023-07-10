@@ -8,17 +8,24 @@ head
   link(href='https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap' rel='stylesheet')
   link(rel='stylesheet' href='/static/index.css')
 button#sign-out Sign out
-section#container
-  header 
-    h1 Hola #{user.username} This is the chat page!
-  h2 User #{user.username} has connected
-  main
-    //
-      <p class="msg others-msg">Hola Carola!</p>
-      <p class="msg own-msg">Como andas?</p>
-  form#msg-form
-    textarea#message(name='message' cols='30' rows='10' placeholder='Your message here...' autocomplete='off' autofocus='' required='')
-    input#submit-msg(type='submit' value='Send')
+section#chat-container
+  aside#notifs-box.section
+  //- test notif msgs: 
+    //- p.connection-notif User 1 has connected
+    //- p.connection-notif User 3 has disconnected
+    //- p.connection-notif adjhasjhdbhjasbdhjbasbdaSJSHDASJHDBHAJDBHJBSDHJB has disconnected 
+  section#chat-main.section
+    header 
+      h1 Hola #{user.username} This is the chat page!
+    h2 User #{user.username} has connected
+    main
+      //
+        <p class="msg others-msg">Hola Carola!</p>
+        <p class="msg own-msg">Como andas?</p>
+    form#msg-form
+      textarea#message(name='message' cols='30' rows='10' placeholder='Your message here...' autocomplete='off' autofocus='' required='')
+      input#submit-msg(type='submit' value='Send')
+  aside#users-connected.section
 script(src='/socket.io/socket.io.js')
 script.
   let user = '!{JSON.stringify(user)}'

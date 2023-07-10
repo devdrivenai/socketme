@@ -146,7 +146,6 @@ main {
     border: 1px solid grey;
     border-radius: 10px;
     padding: 2rem;
-    /* height: 50vh; */
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -183,4 +182,56 @@ main {
     color: #fff;
     font-size: 1rem;
     cursor: pointer;
+}
+
+/* chat-page specifics */
+
+#chat-container {
+    display: flex;
+    justify-content: space-between;
+    height: 95%;
+    width: 95%;
+    background-color: aliceblue;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.section {
+    flex: 1;
+}
+
+#notifs-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    padding-block: 2rem;
+}
+
+.connection-notif {
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    margin-block: 0.5rem;
+    width: 30ch;
+
+    /* For ridiculously long usernames: */
+    overflow-wrap: break-word;
+}
+
+.own-connection-notif {
+    color: #333;
+    background-color: blanchedalmond;
+}
+
+.sb-else-connection-notif {
+    background-color: chocolate;
+    color:#eee;
+}
+
+#chat-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 95%;
 }

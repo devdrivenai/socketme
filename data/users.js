@@ -1,3 +1,4 @@
+// NOTE: usernames should be unique
 const users = [
     { username: 'carola', password: 'thisismypass' },
     { username: 'carolo', password: 'thisisnotmypass' },

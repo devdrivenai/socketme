@@ -4,9 +4,23 @@ const app = require('./app')
 
 const io = new Server(server)
 
+const connectedClients = []
+// temp workaround for browser refresh:
+const disconnecting = []
+
 io.on('connection', clientSocket => {
     const { username, password } = clientSocket.handshake.query
-    console.log(`${username} has connected...`)
+    if (disconnecting.includes(username)) {
+        const elem = disconnecting.indexOf(username)
+        disconnecting.splice(elem,1)
+        clientSocket.emit('you_connected')
+    }
+    if (!connectedClients.includes(username)) {
+        connectedClients.push(username)
+        console.log(`${username} has connected...`)
+        clientSocket.emit('you_connected')
+        clientSocket.broadcast.emit('sb_else_connected', username)
+    }
 
     clientSocket.on('msg_sent', msg => {
         console.log('A client will broadcast a msg to the others...')
@@ -18,6 +32,15 @@ io.on('connection', clientSocket => {
     })
 
     clientSocket.on('disconnect', () => {
-        console.log(`${username} has disconnected!`)
+        disconnecting.push(username)
+        setTimeout(() => {
+            if (disconnecting.includes(username)) {
+                console.log(`${username} has disconnected!`)
+                let elem = disconnecting.indexOf(username)
+                disconnecting.splice(elem,1)
+                elem = connectedClients.indexOf(username)
+                connectedClients.splice(elem,1)
+            }
+        }, 10000);
     })
 })
