@@ -45,25 +45,30 @@ socket.on('others_msg', msg => {
 })
 
 const notifsBox = document.querySelector('#notifs-box')
-socket.on('you_connected', () => {
+const addConnectedNotif = ({
+    parentElem, 
+    username,
+    ownNotif = false
+    }) => {
     const p = document.createElement('p')
-    p.innerText = "You've just connected"
     p.classList.add('connection-notif')
-    p.classList.add('own-connection-notif')
-    notifsBox.appendChild(p)
+    if (ownNotif) {
+        p.classList.add('own-connection-notif')
+        p.innerText = "You've just connected"
+    } else {
+        p.classList.add('sb-else-connection-notif')
+        p.innerText = `${username} just connected`
+    }
+    parentElem.appendChild(p)
     setTimeout(() => {
-        notifsBox.removeChild(p)
+        parentElem.removeChild(p)
     }, 3000);
+}
+
+socket.on('you_connected', () => {
+    addConnectedNotif({ parentElem: notifsBox, ownNotif: true })
 })
 
 socket.on('sb_else_connected', username => {
-    const p = document.createElement('p')
-    p.innerText = `${username} just connected`
-    p.classList.add('connection-notif')
-    p.classList.add('sb-else-connection-notif')
-    notifsBox.appendChild(p)
-    setTimeout(() => {
-        notifsBox.removeChild(p)
-    }, 3000);
+    addConnectedNotif({ parentElem: notifsBox, username })
 })
-
