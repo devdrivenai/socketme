@@ -51,7 +51,9 @@ socket.on('you_connected', () => {
     p.classList.add('connection-notif')
     p.classList.add('own-connection-notif')
     notifsBox.appendChild(p)
-    // setTimeout to delete after a few secs
+    setTimeout(() => {
+        notifsBox.removeChild(p)
+    }, 3000);
 })
 
 socket.on('sb_else_connected', username => {
@@ -60,6 +62,8 @@ socket.on('sb_else_connected', username => {
     p.classList.add('connection-notif')
     p.classList.add('sb-else-connection-notif')
     notifsBox.appendChild(p)
-    // setTimeout to delete after a few secs
+    setTimeout(() => {
+        notifsBox.removeChild(p)
+    }, 3000);
 })
 
