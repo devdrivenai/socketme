@@ -6,6 +6,7 @@ const session = require('express-session')
 
 const users = require('./data/users')
 const isLoggedIn = require('./middleware/isLoggedIn')
+const isLoggedOut = require('./middleware/isLoggedOut')
 
 const app = express()
 
@@ -35,11 +36,11 @@ app.use(session({
   }))
 
 
-app.get('/', (req, res) => {
+app.get('/', isLoggedOut, (req, res) => {
     res.render('')
 })
 
-app.get('/login', (req, res) => {
+app.get('/login', isLoggedOut, (req, res) => {
     res.render('login')
 })
 
