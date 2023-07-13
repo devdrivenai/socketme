@@ -1,0 +1,15 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Socketme
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+  link(href='https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap' rel='stylesheet')
+  link(rel='stylesheet' href='/static/index.css')
+section#home-container
+  h1 Oops... 404!!
+  h2 Wait, what? That's not a valid route
+  h3 Maybe you want to go back to the home page?
+  form#redirect-form(action='/' method='GET')
+    input#redirect-submit(type='submit' value='Yes!')

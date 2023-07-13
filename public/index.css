@@ -32,6 +32,11 @@ h1 {
     padding: 1.5rem;
 }
 
+h2 {
+    width: 50ch;
+    text-align: center;
+}
+
 main {
     flex-grow: 1;
     width: 75%;
@@ -123,7 +128,7 @@ main {
 }
 
 #redirect-form {
-    margin-top: 1.5rem;
+    margin: 1.5rem;
 }
 
 #redirect-submit {
@@ -133,4 +138,100 @@ main {
     background-color: rgb(68, 68, 140);
     color: #fff;
     font-size: 1rem;
+}
+
+/* login-page specifics */
+
+#login-form {
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#login-form > p {
+    margin-top: -2.7rem;
+    background-color: blanchedalmond;
+    padding: 0 0.2rem;
+    width: fit-content;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.form-field > input {
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
+
+#sign-out {
+    position: absolute;
+    top: 7%;
+    right: 5%;
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem;
+    margin-left: 2px;
+    background-color: rgb(68, 68, 140);
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* chat-page specifics */
+
+#chat-container {
+    display: flex;
+    justify-content: space-between;
+    height: 95%;
+    width: 95%;
+    background-color: aliceblue;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.section {
+    flex: 1;
+}
+
+#notifs-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    padding-block: 2rem;
+}
+
+.connection-notif {
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    margin-block: 0.5rem;
+    width: 30ch;
+
+    /* For ridiculously long usernames: */
+    overflow-wrap: break-word;
+}
+
+.own-connection-notif {
+    color: #333;
+    background-color: blanchedalmond;
+}
+
+.sb-else-connection-notif {
+    background-color: chocolate;
+    color:#eee;
+}
+
+#chat-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 95%;
 }
