@@ -23,9 +23,11 @@ section#chat-container
         <p class="msg others-msg">Hola Carola!</p>
         <p class="msg own-msg">Como andas?</p>
     form#msg-form
-      textarea#message(name='message' cols='30' rows='10' placeholder='Your message here...' autocomplete='off' autofocus='' required='')
+      textarea#message(name='message' rows='10' placeholder='Your message here...' autocomplete='off' autofocus='' required='')
       input#submit-msg(type='submit' value='Send')
   aside#users-connected.section
+    h2 Users connected:
+    p#users-connected-box
 script(src='/socket.io/socket.io.js')
 script.
   let user = '!{JSON.stringify(user)}'
