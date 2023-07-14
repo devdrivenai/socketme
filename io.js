@@ -22,6 +22,11 @@ io.on('connection', clientSocket => {
         clientSocket.broadcast.emit('sb_else_connected', username)
     }
 
+    clientSocket.on('request users connected', () => {
+        console.log('client has requested the users connected')
+        clientSocket.emit('send users connected', connectedClients)
+    })
+
     clientSocket.on('msg_sent', msg => {
         console.log('A client will broadcast a msg to the others...')
         clientSocket.broadcast.emit('others_msg', msg)
