@@ -30,6 +30,7 @@ const addConnectedNotif = ({
     parentElem.appendChild(p)
     setTimeout(() => {
         parentElem.removeChild(p)
+        if (!ownNotif) usersConnectedBox.innerText += `, ${username}`
     }, 3000);
 }
 
