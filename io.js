@@ -45,6 +45,7 @@ io.on('connection', clientSocket => {
                 disconnecting.splice(elem,1)
                 elem = connectedClients.indexOf(username)
                 connectedClients.splice(elem,1)
+                clientSocket.broadcast.emit('send users connected', connectedClients)
             }
         }, 10000);
     })
