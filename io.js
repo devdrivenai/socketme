@@ -9,22 +9,25 @@ const connectedClients = []
 const disconnecting = []
 
 io.on('connection', clientSocket => {
+    console.log(`New connection. Users connected: ${connectedClients}`)
     const { username, password } = clientSocket.handshake.query
+    console.log(`username is: ${username}`)
     if (disconnecting.includes(username)) {
         const elem = disconnecting.indexOf(username)
         disconnecting.splice(elem,1)
-        clientSocket.emit('you_connected')
+        // clientSocket.emit('you_connected')
     }
     if (!connectedClients.includes(username)) {
         connectedClients.push(username)
         console.log(`${username} has connected...`)
         clientSocket.emit('you_connected')
         clientSocket.broadcast.emit('sb_else_connected', username)
+        io.emit('fill users connected box', connectedClients)
     }
 
     clientSocket.on('request users connected', () => {
         console.log('client has requested the users connected')
-        clientSocket.emit('send users connected', connectedClients)
+        clientSocket.emit('fill users connected box', connectedClients)
     })
 
     clientSocket.on('msg_sent', msg => {
@@ -45,8 +48,9 @@ io.on('connection', clientSocket => {
                 disconnecting.splice(elem,1)
                 elem = connectedClients.indexOf(username)
                 connectedClients.splice(elem,1)
-                clientSocket.broadcast.emit('send users connected', connectedClients)
+                clientSocket.broadcast.emit('sb_else_disconnected', username)
+                clientSocket.broadcast.emit('fill users connected box', connectedClients)
             }
-        }, 10000);
+        }, 5000);
     })
 })

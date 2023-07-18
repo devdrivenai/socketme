@@ -13,10 +13,10 @@ const notifsBox = document.querySelector('#notifs-box')
 const usersConnectedBox = document.querySelector('#users-connected-box')
 
 // functions for event listeners & DOM functions
-const addConnectedNotif = ({
-    parentElem, 
+const addConnectedNotif = ({ 
     username,
-    ownNotif = false
+    ownNotif = false, 
+    connecting = true
     }) => {
     const p = document.createElement('p')
     p.classList.add('connection-notif')
@@ -25,12 +25,15 @@ const addConnectedNotif = ({
         p.innerText = "You've just connected"
     } else {
         p.classList.add('sb-else-connection-notif')
-        p.innerText = `${username} just connected`
+        if (connecting) {
+            p.innerText = `${username} just connected`
+        } else {
+            p.innerText = `${username} just disconnected`
+        }
     }
-    parentElem.appendChild(p)
+    notifsBox.appendChild(p)
     setTimeout(() => {
-        parentElem.removeChild(p)
-        if (!ownNotif) usersConnectedBox.innerText += `, ${username}`
+        notifsBox.removeChild(p)
     }, 3000);
 }
 
@@ -77,14 +80,18 @@ socket.on('others_msg', msg => {
 })
 
 socket.on('you_connected', () => {
-    addConnectedNotif({ parentElem: notifsBox, ownNotif: true })
+    addConnectedNotif({ ownNotif: true })
 })
 
 socket.on('sb_else_connected', username => {
-    addConnectedNotif({ parentElem: notifsBox, username })
+    addConnectedNotif({ username })
 })
 
-socket.on('send users connected', connectedClients => {
+socket.on('sb_else_disconnected', username => {
+    addConnectedNotif({ username, connecting: false })
+})
+
+socket.on('fill users connected box', connectedClients => {
     console.log('connected clients received:')
     console.log(connectedClients)
     // add users connected to #users-connected-box
