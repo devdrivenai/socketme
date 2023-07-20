@@ -9,7 +9,7 @@ const connectedClients = []
 const disconnecting = []
 
 io.on('connection', clientSocket => {
-    const { username, password } = clientSocket.handshake.query
+    const { username } = clientSocket.handshake.query
     if (disconnecting.includes(username)) {
         const elem = disconnecting.indexOf(username)
         disconnecting.splice(elem,1)
