@@ -74,8 +74,6 @@ signOutBtn.addEventListener('click', signOut)
 
 // socket event receivers
 socket.on('others_msg', msg => {
-    console.log('This client received a msg from others:')
-    console.log(msg)
     addMsgBox(msg, false)
 })
 
@@ -92,8 +90,6 @@ socket.on('sb_else_disconnected', username => {
 })
 
 socket.on('fill users connected box', connectedClients => {
-    console.log('connected clients received:')
-    console.log(connectedClients)
     // add users connected to #users-connected-box
     const usersConnected = connectedClients.join(', ')
     usersConnectedBox.innerText = usersConnected
