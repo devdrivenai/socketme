@@ -18,7 +18,7 @@ io.on('connection', clientSocket => {
         connectedClients.push(username)
         clientSocket.emit('you_connected')
         clientSocket.broadcast.emit('sb_else_connected', username)
-        io.emit('fill users connected box', connectedClients)
+        clientSocket.broadcast.emit('fill users connected box', connectedClients)
     }
 
     clientSocket.on('request users connected', () => {
